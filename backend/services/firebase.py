@@ -58,11 +58,17 @@ def get_db():
 
 
 def get_realtime_db():
-    """Get the Realtime DB module."""
+    """Get the Realtime DB module, or None if not configured."""
     global _realtime_db
     if _realtime_db is None:
         if firebase_admin._apps:
             _realtime_db = realtime_db_module
+    if _realtime_db is None:
+        return None
+    # Verify databaseURL was set — without it the module can't connect
+    if not firebase_admin.get_app().options.get("databaseURL"):
+        logging.warning("Realtime DB databaseURL not configured, skipping live feed write.")
+        return None
     return _realtime_db
 
 
