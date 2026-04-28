@@ -35,7 +35,7 @@ function formatAttr(str) {
 }
 
 function formatAttrValue(val) {
-  if (val === undefined || val === null) return '—'
+  if (val === undefined || val === null || val === '') return null
   return String(val)
 }
 

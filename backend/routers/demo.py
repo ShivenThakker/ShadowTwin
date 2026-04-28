@@ -108,7 +108,7 @@ def _make_fallback_response(decision_id, input_dict, category, timestamp):
             bias_severity_score=72 if tier == "tier_3" else (58 if tier == "tier_2" else 35),
             severity_label="severe" if tier != "tier_1" else "moderate",
             primary_causal_attribute="university_tier",
-            secondary_causal_attribute="employment_gap_months" if gap > 0 else None,
+            secondary_causal_attribute="name",
             shadow_results=[
                 ShadowResult(
                     attribute_tested="name",
