@@ -28,6 +28,17 @@ const defaultJob = {
   additional_context: 'Strong portfolio but career gap due to caregiving.',
 }
 
+function formatAttr(str) {
+  if (!str) return '—'
+  // lowercase first letter, replace underscores with spaces
+  return str.replace(/_/g, ' ').replace(/^[A-Z]/, (c) => c.toLowerCase())
+}
+
+function formatAttrValue(val) {
+  if (val === undefined || val === null) return '—'
+  return String(val)
+}
+
 function Demo() {
   const [scenario, setScenario] = useState('loan')
   const [loanInput, setLoanInput] = useState(defaultLoan)
@@ -42,14 +53,14 @@ function Demo() {
     if (!data?.shadow_results) return []
     return data.shadow_results.map((result, index) => ({
       key: `${result.attribute_tested}-${index}`,
-      attribute: result.attribute_tested,
+      attribute: formatAttr(result.attribute_tested),
       shadowValue:
-        result.shadow_input_name ||
-        result.shadow_postcode ||
-        result.shadow_gender ||
-        result.shadow_location ||
-        result.shadow_university_tier ||
-        result.shadow_employment_gap_months ||
+        formatAttrValue(result.shadow_input_name) ||
+        formatAttrValue(result.shadow_postcode) ||
+        formatAttrValue(result.shadow_gender) ||
+        formatAttrValue(result.shadow_location) ||
+        formatAttrValue(result.shadow_university_tier) ||
+        formatAttrValue(result.shadow_employment_gap_months) ||
         '—',
       decision: result.shadow_decision,
       diverged: result.decision_diverged,
@@ -288,11 +299,11 @@ function Demo() {
               <div className="result-preview">
                 <div>
                   <p className="card-title">Primary cause</p>
-                  <span className="badge danger">{data.primary_causal_attribute}</span>
+                  <span className="badge danger">{formatAttr(data.primary_causal_attribute)}</span>
                 </div>
                 <div>
                   <p className="card-title">Secondary cause</p>
-                  <span className="badge warning">{data.secondary_causal_attribute}</span>
+                  <span className="badge warning">{formatAttr(data.secondary_causal_attribute)}</span>
                 </div>
               </div>
               <div className="panel inset">
