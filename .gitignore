@@ -1,0 +1,14 @@
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env
+/frontend/.env.*
+/backend/.env
+/backend/.env.*
+/.env
+/node_modules/
+/dist/
+/Backend_Architecture.md
+/CLAUDE.md
+/IMPLEMENTATION_PLAN.md
+/PRD.md
+/User_App_Flow.md
